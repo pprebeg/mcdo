@@ -1,7 +1,8 @@
 from ex_16_4 import *
-from moobench.optlib_pymoo_proto import PymooOptimizationAlgorithmMulti
+from moobench.optlib_pymoo_proto import PymooOptimizationAlgorithmSingle
+from moobench.optlib_scipy import ScipyOptimizationAlgorithm
 import os
-
+# test commit
 # Prepare output directory for writing
 out_folder_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'out')
 isExist = os.path.exists(out_folder_path)
@@ -22,7 +23,7 @@ if True:
 
 if False:
     pop_size = 100
-    num_iter = 200
+    num_iter = 100
     max_evaluations = pop_size * num_iter
     mutation = {'name':'real_pm', 'eta':20, 'prob': 0.1}  # Check
     crossover = {'name':'real_sbx', 'eta':20, 'prob':0.95}  # Check
@@ -39,7 +40,7 @@ if False:
         op.opt_algorithm = PymooOptimizationAlgorithmSingle('de_default', 'de', alg_ctrl=ga_ctrl)
         sol = op.optimize()
         op.print_output()
-    if True:
+    if False:
         brkga_ctrl = {'n_elites': 100, 'n_offsprings': 400,'n_mutants' : 100,'bias' : 0.7,'termination': termination}
         op.opt_algorithm = PymooOptimizationAlgorithmSingle('brkga_default', 'brkga', alg_ctrl=brkga_ctrl)
         sol = op.optimize()
