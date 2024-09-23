@@ -9,6 +9,7 @@ def f_ex1(x):
     return y
 def problem_ex1():
     return [f_ex1,(-2,2),0]
+    #return [f_ex1,(-1.5,1.5),0]
 
 def f_ex2(x):
     y = (x - 2) * x * (x + 2)**2
