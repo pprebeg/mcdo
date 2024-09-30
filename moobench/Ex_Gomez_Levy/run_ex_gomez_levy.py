@@ -1,4 +1,4 @@
-from ex_16_4 import *
+from ex_gomez_levy import *
 from moobench.optlib_pymoo_proto import PymooOptimizationAlgorithmSingle
 from moobench.optlib_scipy import ScipyOptimizationAlgorithm
 import os
@@ -9,25 +9,26 @@ isExist = os.path.exists(out_folder_path)
 if not isExist:
     os.makedirs(out_folder_path)
 
-op = EX_16_4_OptProb('EX_16_4')
+op = EX_GomezLevy_OptProb()
 
 #SciPy algorithms
-if False:
+if True:
     opt_ctrl = {}
     op.opt_algorithm = ScipyOptimizationAlgorithm('SLSQP_mi=1000','SLSQP',opt_ctrl)
     if True:
         sol = op.optimize()
+        #sol = op.optimize([0.0,-0.5]) # start from solution [0.0,-0.5]
         op.print_output()
     else:
         sol = op.optimize_and_write(out_folder_path)
 
 #Pymoo library
 pop_size = 100
-num_iter = 2
+num_iter = 100
 max_evaluations = pop_size * num_iter
 termination = ('n_eval', max_evaluations)
 init_ctrl_opt = {'termination': termination, 'tolfun': 1e-6, 'tolx': 1e-5}
-if False:
+if hf:
     mutation = {'name':'real_pm', 'eta':20, 'prob': 0.1}  # Check
     crossover = {'name':'real_sbx', 'eta':20, 'prob':0.95}  # Check
     selection = {'name':'random'}
@@ -74,7 +75,7 @@ if False:
         op.opt_algorithm = PymooOptimizationAlgorithmSingle('brkga_default', 'brkga', alg_ctrl=brkga_ctrl)
         sol = op.optimize()
         op.print_output()
-if True:#nelder-mead
+if False:#nelder-mead
     def adaptive_params(problem):
         n = problem.n_var
         alpha = 1
